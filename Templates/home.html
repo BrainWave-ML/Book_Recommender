@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <div class="container">
+        <p class="text-center logo">
+            <span class="main h1 h1-large h1-lg ">BrainWave</span> <span class="side">Search Engine</span>
+        </p>
+        <img src="{% static 'BrainWave_logo.png' %}"> 
+        <div class="form-group main-content">
+            <input id ="search" class="form-control" type="text" placeholder="Enter Book Name/ ISBN ">
+        </div>
+        <button type="submit" class="btn btn-lg form-control search">Search</button>   
+    </div>
+    
+{% endblock %}
