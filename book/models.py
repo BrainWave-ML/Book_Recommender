@@ -21,4 +21,4 @@ class Book(models.Model):
     modified_at = models.DateTimeField(auto_now=True,editable=False)
 
     def __str__(self):
-        return self.name
+        return self.name+'-'+self.store.name
