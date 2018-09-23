@@ -15,6 +15,7 @@ class Book(models.Model):
     price = models.FloatField()
     sale = models.IntegerField()
     year = models.IntegerField()
+    image = models.TextField(default='/static/default_book.gif')
     delivery_time = models.IntegerField(default=4)
     url = models.URLField(null=True,blank=True)
     genre = models.CharField(max_length=3,choices=genre_list,default='NUL')

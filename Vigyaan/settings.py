@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = (STATIC_DIR,)
+
 
 WSGI_APPLICATION = 'Vigyaan.wsgi.application'
 

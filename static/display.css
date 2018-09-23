@@ -394,6 +394,7 @@ body{background-color:#eee;}
 	background-color: #333333;
     color: #ffffff;
     display: table;
+    border-radius: 7px;
     font-size: 28px;
     margin: 60px auto 20px;
     padding: 10px 25px;
@@ -407,7 +408,16 @@ body{background-color:#eee;}
 	
 }
 .bottom_btn:hover{
-	background-color: #666;
+	background-color: black;
 	color: #FFF;
 	text-decoration:none;
+}
+
+.book-name
+{
+  font-size: 40px;
+}
+.author-name
+{
+  font-size: 20px;
 }
