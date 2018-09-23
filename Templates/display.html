@@ -11,9 +11,7 @@
 
 {% block content %}
 
-<! ========================  
-    Syed Sahar Ali Raza   	 
-  ========================	!>
+
 <div id="generic_price_table">   
 <section>
         <div class="container">
@@ -21,7 +19,7 @@
                 <div class="col-md-12">
                     <!--PRICE HEADING START-->
                     <div class="price-heading clearfix">
-                        <h1>Bootstrap Pricing Table</h1>
+                        <h1>Compare Book Price</h1>
                     </div>
                     <!--//PRICE HEADING END-->
                 </div>
@@ -45,7 +43,7 @@
                             	<!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span>Other</span>
+                                    <span>{{ store_1 }}</span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -55,10 +53,10 @@
                             <!--PRICE START-->
                             <div class="generic_price_tag clearfix">	
                                 <span class="price">
-                                    <span class="sign">$</span>
-                                    <span class="currency">99</span>
-                                    <span class="cent">.99</span>
-                                    <span class="month">/MON</span>
+                                    <span class="sign">Rs</span>
+                                    <span class="currency">{{ price_1 }}</span>
+                                 
+                                 
                                 </span>
                             </div>
                             <!--//PRICE END-->
@@ -69,11 +67,11 @@
                         <!--FEATURE LIST START-->
                         <div class="generic_feature_list">
                         	<ul>
-                            	<li><span>2GB</span> Bandwidth</li>
-                                <li><span>150GB</span> Storage</li>
-                                <li><span>12</span> Accounts</li>
-                                <li><span>7</span> Host Domain</li>
-                                <li><span>24/7</span> Support</li>
+                            	<li><span>{{ rating_1 }}</span> Rating</li>
+                                <li><span>{{ review_1 }}</span> Sentiment</li>
+                                <li><span>{{ delivery_1 }} days</span> Avg Delivery time</li>
+                                <li><span>{{ sale_1 }}</span> Sales</li>
+                                
                             </ul>
                         </div>
                         <!--//FEATURE LIST END-->
@@ -103,7 +101,7 @@
                             	<!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span>Recommended</span>
+                                    <span>{{ store_2 }}<small> - Recommended</small></span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -113,10 +111,10 @@
                             <!--PRICE START-->
                             <div class="generic_price_tag clearfix">	
                                 <span class="price">
-                                    <span class="sign">$</span>
-                                    <span class="currency">199</span>
-                                    <span class="cent">.99</span>
-                                    <span class="month">/MON</span>
+                                    <span class="sign">Rs</span>
+                                    <span class="currency">{{ price_2 }}</span>
+                               
+                                   
                                 </span>
                             </div>
                             <!--//PRICE END-->
@@ -127,11 +125,10 @@
                         <!--FEATURE LIST START-->
                         <div class="generic_feature_list">
                         	<ul>
-                            	<li><span>2GB</span> Bandwidth</li>
-                                <li><span>150GB</span> Storage</li>
-                                <li><span>12</span> Accounts</li>
-                                <li><span>7</span> Host Domain</li>
-                                <li><span>24/7</span> Support</li>
+                                <li><span>{{ rating_2 }}</span> Rating</li>
+                                <li><span>{{ review_2 }}</span> Sentiment</li>
+                                <li><span>{{ delivery_2 }} days</span> Avg Delivery time</li>
+                                <li><span>{{ sale_2 }}</span> Sales</li>
                             </ul>
                         </div>
                         <!--//FEATURE LIST END-->
