@@ -56,7 +56,9 @@ classifier_file.close()
 
 
 
-text = "delivery wasn't so good"
-text = [text]
-predic = classifier.predict(vect.transform(text))
-print(predic)
+
+def pred_sentiment(text):
+	text = [text]
+	predic = classifier.predict(vect.transform(text))
+	
+	return predic
