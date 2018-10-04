@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from .models import Book
+from store.models import Store
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
+from populate import price,image_url,title,reviews,rating,author,url
+
 
 def home(request):
     return render(request,'home.html')
@@ -91,3 +94,28 @@ def display_books(request):
 			'image_2':t[1]['image'],
 
 		})
+
+
+@csrf_exempt
+def pop_data(request):
+	store = Store()
+	store.name = 'FPK'
+	store.cum_rating = 4.6
+	store.save()
+	ctr = 0
+	for i in title:
+		book = Book()
+		
+		book.name = i 
+		book.author = author[ctr]
+		book.rating = rating[ctr]
+		book.sale = reviews[ctr]
+		book.store = store
+		book.image = image_url[ctr]
+		book.price = price[ctr]
+		book.url = url[ctr]
+		book.save()
+		print(ctr)
+		ctr = ctr+1
+
+	return 0
