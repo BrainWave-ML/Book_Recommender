@@ -3,7 +3,7 @@ from .models import Book
 from store.models import Store
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-from populate import price,image_url,title,reviews,rating,author,url
+from populate import price,image_url,title,reviews,rating,author,url, description
 
 
 def home(request):
@@ -102,7 +102,7 @@ def pop_data(request):
 	store.name = 'FPK'
 	store.cum_rating = 4.6
 	store.save()
-	ctr = 0
+	ctr = 1
 	for i in title:
 		book = Book()
 		
@@ -114,6 +114,7 @@ def pop_data(request):
 		book.image = image_url[ctr]
 		book.price = price[ctr]
 		book.url = url[ctr]
+		book.description = description[ctr]
 		book.save()
 		print(ctr)
 		ctr = ctr+1

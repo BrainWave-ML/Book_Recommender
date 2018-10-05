@@ -22,6 +22,7 @@ class Book(models.Model):
     ISBN = models.TextField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True,editable=False)
     modified_at = models.DateTimeField(auto_now=True,editable=False)
+    description = models.TextField(default='NULL', blank=True, null=True)
 
     def __str__(self):
         return self.name+'-'+self.store.name
