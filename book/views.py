@@ -184,18 +184,20 @@ def pop_data(request):
 	store.cum_rating = 4.6
 	store.save()
 	ctr = 1
-	for i in title:
+	l = len(title)
+	print(l)
+	for i in range(l):
 		book = Book()
 		
-		book.name = i 
-		book.author = author[ctr]
-		book.rating = rating[ctr]
-		book.sale = reviews[ctr]
+		book.name = title[i]
+		book.author = author[i]
+		book.rating = rating[i]
+		book.sale = reviews[i]
 		book.store = store
-		book.image = image_url[ctr]
-		book.price = price[ctr]
-		book.url = url[ctr]
-		book.description = description[ctr]
+		book.image = image_url[i]
+		book.price = price[i]
+		book.url = url[i]
+		book.description = description[i]
 		book.save()
 		print(ctr)
 		ctr = ctr+1
