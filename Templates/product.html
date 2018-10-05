@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block title %}{{name}}{% endblock %}
+{% block title %}{{title}}{% endblock %}
  
 {% block content %} 
     <div class="container">
@@ -10,9 +10,9 @@
                 <img src ={{image_1}} height="531px" width="413px">
             </div>
             <div class="col-md-6 details">
-                <span class="Prop">Price :</span><span class="value">{{price_1}}</span><br>
+                <span class="Prop">Price :</span><span class="value">{{price}}</span><br>
                 <span class="Prop">Author :</span><span class="value">{{author}}</span><br>
-                <span class="Prop">Avg. Delivery Time :</span><span class="value">{{delivery_1}}</span><br> 
+                <span class="Prop">Avg. Delivery Time :</span><span class="value">{{delivery}}</span><br> 
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href={% url 'compare' id1=id_1 id2=id_2 %}>
+                    <a href={% url 'compare' string=title %}>
                     <div class="single-promo promo4 promo">
                         <p >Compare Product</p>
                     </div></a>
@@ -51,16 +51,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <img class="rec" src= {% static 'img/product-1.jpg' %} alt="Recommended 1">
+                    <img class="rec" src= {{image_1}} alt="Recommended 1"><br>
+                        {{title_1}}
                 </div>
                 <div class="col-md-3">
-                        <img class="rec" src= {% static 'img/product-2.jpg' %} alt="Recommended 2">
+                        <img class="rec" src= {{image_2}} alt="Recommended 2"><br>
+                        {{title_2}}
                 </div>
                 <div class="col-md-3">
-                        <img class="rec" src= {% static 'img/product-3.jpg' %} alt="Recommended 3">
+                        <img class="rec" src= {{image_3}} alt="Recommended 3"><br>
+                        {{title_3}}
                 </div>
                 <div class="col-md-3">
-                        <img class="rec" src= {% static 'img/product-4.jpg' %} alt="Recommended 4">
+                        <img class="rec" src= {{image_4}} alt="Recommended 4"><br>
+                        {{title_4}}
                 </div>
             </div>
             

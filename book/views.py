@@ -6,14 +6,15 @@ from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from populate import price,image_url,title,reviews,rating,author,url, description
+from doc_retrieval import classifier, vectb,df
 
 
 def home(request):
     return render(request,'home.html')
 
 @csrf_exempt
-def display_books(request):
-	string = request.POST.get('bname')
+def compare_books(request,string):
+
 	name = string.upper()
 	print("count is:->")
 	print(Book.objects.filter(name__icontains = name).count())
@@ -96,61 +97,58 @@ def display_books(request):
 		})
 
 @csrf_exempt
-def compare_books(request, id1, id2):
-	
-	if(Book.objects.filter(id= id1).count()==0):
-		t = [{},{}]
-		t[0]['name'] = 'Not Available'
-		t[0]['author'] = 'Unknown'
+def display_books(request):
+	if request.method == 'POST':
+		st = request.POST.get('bname')
+		name = st.upper()
+		if(Book.objects.filter(name= name).count()==0):
+			print("Not available")
+			error = 'No book available'
+			return render(request,'home.html',{'error':error})
+		else:
+			bookr = Book.objects.filter(name=name)[0]
+			print(bookr.id)	
+			i = bookr.id
+			book = df.iloc[i:i+1,1:]
+			book_vectorized = vectb.transform(book['Description'])
+			ans_books = classifier.kneighbors(book_vectorized[0], n_neighbors=5)
+			
 
-		t[0]['price'] = 0
-		t[0]['rating'] = 0
-		t[0]['review_value'] = 0
-		t[0]['store'] = 0
-		t[0]['delivery_time'] = 9999
-		t[0]['sale'] = 0
-		t[0]['url'] = '/home'
-		t[0]['image'] = '/static/default_book.gif'
+			book_ind = ans_books[1]
+			print(ans_books[1])
+			new_ind = [x for x in ans_books[1][0] if x!=i]
+			print(new_ind)
 
-		t[1]['price'] = 0
-		t[1]['rating'] = 0
-		t[1]['review_value'] = 0
-		t[1]['store'] = 0
-		t[1]['delivery_time'] = 9999
-		t[1]['sale'] = 0
-		t[1]['url'] = '/home'
-		t[1]['image'] = '/static/default_book.gif'
+			book_1 = Book.objects.filter(id=new_ind[0])[0]
+			book_2 = Book.objects.filter(id=new_ind[1])[0]
+			book_3 = Book.objects.filter(id=new_ind[2])[0]
+			book_4 = Book.objects.filter(id=new_ind[3])[0]
+
+			return render(request,'product.html',{
+				'title':bookr.name,
+				'author':bookr.author,
+				'price':bookr.price,
+				'delivery':bookr.delivery_time,
+				'rating':bookr.rating,
+				'image':bookr.image,
+
+				'title_1':book_1.name,
+				'image_1':book_1.image,
+
+				'title_2':book_2.name,
+				'image_2':book_2.image,
+				
+				'title_3':book_3.name,
+				'image_3':book_3.image,
+				
+				'title_4':book_4.name,
+				'image_4':book_4.image,
+				})
+
 	else:
-		book_1 = Book.objects.filter(id=id1)[0]
-		book_2 = Book.objects.filter(id=id2)[0]
-	print(book_1)
-	print(book_2)
-	return render(request,'display.html',
-		{
-			'name': book_1.name,
-			'author': book_1.author,
+		print('method error')
+		return render(request,'home.html')
 
-			'price_1':book_1.price,
-			'rating_1':book_1.rating,
-			'review_1':book_1.review_value,
-			'store_1':book_1.store,
-			'delivery_1':book_1.delivery_time,
-			'sale_1':book_1.sale,
-			'url_1':book_1.url,
-			'image_1':book_1.image,
-
-			'price_2':book_2.price,
-			'rating_2':book_2.rating,
-			'review_2':book_2.review_value,
-			'store_2':book_2.store,
-			'delivery_2':book_2.delivery_time,
-			'sale_2':book_2.sale,
-			'url_2':book_2.url,
-			'image_2':book_2.image,
-		})
-
-def product(request, id):
-	return render(request, 'display.html')
 
 def register(request):
 	if request.method == 'POST':		
