@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+
+{% block script %}
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="alertBox col-md-12"><br><br><br>
+            <div class="alert">
+                    {{error}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6"><br><br><br>
+            <h2 class="h2 text-center">Login</h2>
+            <hr><br>
+            <form method="post">
+                {% csrf_token %}
+                <span class="form-group">
+                    <input type="text" name="username" placeholder="Username" class="form-control">  
+                </span>
+                <br>
+                <span class="form-group">
+                    <input type="password" name="password" placeholder="Password" class="form-control">  
+                </span>
+                
+                <br>
+                <button type="submit" class="btn btn-success form-control" href="{% url 'login' %}">Login</button>
+            </form>
+            <br>
+            <div class="text-center">
+                <small><a href="{% url 'register' %}">I want to register</a></small>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+  <h2>Register</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="/login">Login</a>
+    <button type="submit">Register</button>
+  </form>-->
+{% endblock %}
