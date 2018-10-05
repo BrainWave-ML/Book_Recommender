@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from review import views
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('<int:id>/',views.get_reviews),
     path('',include('book.urls')),
     path('sentiment/',views.sentiment),
-   
+    path('logout/', auth_views.logout, {'template_name': 'home.html'}, name='logout'),
 ]

@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     return render(request,'home.html')
@@ -91,3 +93,30 @@ def display_books(request):
 			'image_2':t[1]['image'],
 
 		})
+
+def register(request):
+	if request.method == 'POST':		
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			form.save()
+			username = form.cleaned_data.get('username')
+			raw_password = form.cleaned_data.get('password1')
+			user = authenticate(username=username, password=raw_password)
+			login(request, user)
+		else:
+			return render(request,'register.html',{'error': form.errors})
+		return redirect('home')
+	else:
+		form = UserCreationForm()
+	return render(request, 'register.html', {'form': form,'error':''})
+
+def login_user(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(username=username, password=password)
+		if(user == None):
+			return render(request, 'login.html',{'error':'Invalid credentials'})		
+		login(request, user)
+		return redirect('home')
+	return render(request, 'login.html',{'error':''})
