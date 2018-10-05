@@ -9,15 +9,28 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Buy A Book - Start Comparing Prices</title>
+    <title>Reader's Paradise - Start Comparing Prices</title>
 
     <!-- Bootstrap core CSS -->
     <link href={% static 'bootstrap.min.css' %} rel="stylesheet">
    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
     <script src={% static 'jquery-3.3.1.js' %}></script> 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href={% static 'css/font-awesome.min.css' %}>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href={% static 'css/owl.carousel.css' %}>
+    <link rel="stylesheet" href={% static 'style.css' %}>
+    <link rel="stylesheet" href={% static 'css/responsive.css' %}>
+
     {% block head %}
     {% endblock %}
 
@@ -30,7 +43,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="/home/">Buy A Book</a>
+        <a class="navbar-brand" href="/home/">Reader's Paradise</a>
         {% if user.is_authenticated %}  
           <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>  
         {% else %}

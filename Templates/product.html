@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{name}}{% endblock %}
+ 
+{% block content %} 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src ={{image_1}} height="531px" width="413px">
+            </div>
+            <div class="col-md-6 details">
+                <span class="Prop">Price :</span><span class="value">{{price_1}}</span><br>
+                <span class="Prop">Author :</span><span class="value">{{author}}</span><br>
+                <span class="Prop">Avg. Delivery Time :</span><span class="value">{{delivery_1}}</span><br> 
+            </div>
+        </div>
+    </div>
+    
+    <div class="promo-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo1 promo">
+                        <p>24x7 uptime</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo2 promo">
+                        <p>Free Services</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-promo promo3 promo">
+                        <p>Accurate Comparison</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href={% url 'compare' id1=id_1 id2=id_2 %}>
+                    <div class="single-promo promo4 promo">
+                        <p >Compare Product</p>
+                    </div></a>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End promo area -->
+    
+    <div class="maincontent-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img class="rec" src= {% static 'img/product-1.jpg' %} alt="Recommended 1">
+                </div>
+                <div class="col-md-3">
+                        <img class="rec" src= {% static 'img/product-2.jpg' %} alt="Recommended 2">
+                </div>
+                <div class="col-md-3">
+                        <img class="rec" src= {% static 'img/product-3.jpg' %} alt="Recommended 3">
+                </div>
+                <div class="col-md-3">
+                        <img class="rec" src= {% static 'img/product-4.jpg' %} alt="Recommended 4">
+                </div>
+            </div>
+            
+    </div>
+   
+    <!-- Latest jQuery form server -->
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    
+    <!-- Bootstrap JS form CDN -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+    <!-- jQuery sticky menu -->
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    
+    <!-- jQuery easing -->
+    <script src="js/jquery.easing.1.3.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="js/main.js"></script>
+    
+    <!-- Slider -->
+    <script type="text/javascript" src="js/bxslider.min.js"></script>
+	<script type="text/javascript" src="js/script.slider.js"></script>
+{% endblock %}

@@ -16,7 +16,7 @@ def display_books(request):
 	string = request.POST.get('bname')
 	name = string.upper()
 	print("count is:->")
-	print(Book.objects.filter(name= name).count())
+	print(Book.objects.filter(name__icontains = name).count())
 	if(Book.objects.filter(name= name).count()==0):
 		t = [{},{}]
 		t[0]['name'] = 'Not Available'
@@ -44,6 +44,7 @@ def display_books(request):
 		r = []
 		for i in books:
 			response = {}
+			response['id'] = i.id
 			response['name'] = i.name
 			response['author'] = i.author
 			response['store'] = i.store.name 
@@ -72,11 +73,15 @@ def display_books(request):
 		t.append(other)
 		t.append(recommended)
 	
-	return render(request,'display.html',
+		print(t[0]['id'])
+		print(t[1]['id'])
+
+	return render(request,'product.html',
 		{
 			'name': t[0]['name'],
 			'author': t[0]['author'],
 
+			'id_1':t[0]['id'],
 			'price_1':t[0]['price'],
 			'rating_1':t[0]['rating'],
 			'review_1':t[0]['review_value'],
@@ -86,16 +91,66 @@ def display_books(request):
 			'url_1':t[0]['url'],
 			'image_1':t[0]['image'],
 
-			'price_2':t[1]['price'],
-			'rating_2':t[1]['rating'],
-			'review_2':t[1]['review_value'],
-			'store_2':t[1]['store'],
-			'delivery_2':t[1]['delivery_time'],
-			'sale_2':t[1]['sale'],
-			'url_2':t[1]['url'],
-			'image_2':t[1]['image'],
+			'id_2':t[1]['id'],
 
 		})
+
+@csrf_exempt
+def compare_books(request, id1, id2):
+	
+	if(Book.objects.filter(id= id1).count()==0):
+		t = [{},{}]
+		t[0]['name'] = 'Not Available'
+		t[0]['author'] = 'Unknown'
+
+		t[0]['price'] = 0
+		t[0]['rating'] = 0
+		t[0]['review_value'] = 0
+		t[0]['store'] = 0
+		t[0]['delivery_time'] = 9999
+		t[0]['sale'] = 0
+		t[0]['url'] = '/home'
+		t[0]['image'] = '/static/default_book.gif'
+
+		t[1]['price'] = 0
+		t[1]['rating'] = 0
+		t[1]['review_value'] = 0
+		t[1]['store'] = 0
+		t[1]['delivery_time'] = 9999
+		t[1]['sale'] = 0
+		t[1]['url'] = '/home'
+		t[1]['image'] = '/static/default_book.gif'
+	else:
+		book_1 = Book.objects.filter(id=id1)[0]
+		book_2 = Book.objects.filter(id=id2)[0]
+	print(book_1)
+	print(book_2)
+	return render(request,'display.html',
+		{
+			'name': book_1.name,
+			'author': book_1.author,
+
+			'price_1':book_1.price,
+			'rating_1':book_1.rating,
+			'review_1':book_1.review_value,
+			'store_1':book_1.store,
+			'delivery_1':book_1.delivery_time,
+			'sale_1':book_1.sale,
+			'url_1':book_1.url,
+			'image_1':book_1.image,
+
+			'price_2':book_2.price,
+			'rating_2':book_2.rating,
+			'review_2':book_2.review_value,
+			'store_2':book_2.store,
+			'delivery_2':book_2.delivery_time,
+			'sale_2':book_2.sale,
+			'url_2':book_2.url,
+			'image_2':book_2.image,
+		})
+
+def product(request, id):
+	return render(request, 'display.html')
 
 def register(request):
 	if request.method == 'POST':		
