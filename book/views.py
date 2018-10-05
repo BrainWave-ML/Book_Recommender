@@ -3,13 +3,10 @@ from .models import Book
 from store.models import Store
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-<<<<<<< HEAD
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-=======
 from populate import price,image_url,title,reviews,rating,author,url
 
->>>>>>> e273da41f5558275beb7426b4e80fdd4a1b9bffb
 
 def home(request):
     return render(request,'home.html')
