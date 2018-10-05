@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect
 from .models import Book
+from store.models import Store
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
+<<<<<<< HEAD
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+=======
+from populate import price,image_url,title,reviews,rating,author,url
+
+>>>>>>> e273da41f5558275beb7426b4e80fdd4a1b9bffb
 
 def home(request):
     return render(request,'home.html')
@@ -120,3 +126,27 @@ def login_user(request):
 		login(request, user)
 		return redirect('home')
 	return render(request, 'login.html',{'error':''})
+
+@csrf_exempt
+def pop_data(request):
+	store = Store()
+	store.name = 'FPK'
+	store.cum_rating = 4.6
+	store.save()
+	ctr = 0
+	for i in title:
+		book = Book()
+		
+		book.name = i 
+		book.author = author[ctr]
+		book.rating = rating[ctr]
+		book.sale = reviews[ctr]
+		book.store = store
+		book.image = image_url[ctr]
+		book.price = price[ctr]
+		book.url = url[ctr]
+		book.save()
+		print(ctr)
+		ctr = ctr+1
+
+	return 0
