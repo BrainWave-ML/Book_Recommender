@@ -17,8 +17,8 @@ def compare_books(request,string):
 
 	name = string.upper()
 	print("count is:->")
-	print(Book.objects.filter(name__icontains = name).count())
-	if(Book.objects.filter(name= name).count()==0):
+	print(Book.objects.filter(name__contains = name).count())
+	if(Book.objects.filter(name_contains= name).count()==0):
 		t = [{},{}]
 		t[0]['name'] = 'Not Available'
 		t[0]['author'] = 'Unknown'
@@ -41,7 +41,7 @@ def compare_books(request,string):
 		t[1]['url'] = '/home'
 		t[1]['image'] = '/static/default_book.gif'
 	else:
-		books = Book.objects.filter(name=name)
+		books = Book.objects.filter(name_contains=name)
 		r = []
 		for i in books:
 			response = {}
@@ -101,12 +101,12 @@ def display_books(request):
 	if request.method == 'POST':
 		st = request.POST.get('bname')
 		name = st.upper()
-		if(Book.objects.filter(name= name).count()==0):
+		if(Book.objects.filter(name__contains= name).count()==0):
 			print("Not available")
 			error = 'No book available'
 			return render(request,'home.html',{'error':error})
 		else:
-			bookr = Book.objects.filter(name=name)[0]
+			bookr = Book.objects.filter(name__contains=name)[0]
 			print(bookr.id)	
 			i = bookr.id
 			book = df.iloc[i:i+1,1:]
@@ -116,13 +116,13 @@ def display_books(request):
 
 			book_ind = ans_books[1]
 			print(ans_books[1])
-			new_ind = [x for x in ans_books[1][0] if x!=i]
+			new_ind = [int(x)+1 for x in ans_books[1][0] if x!=i]
 			print(new_ind)
 
-			book_1 = Book.objects.filter(id=new_ind[0])[0]
-			book_2 = Book.objects.filter(id=new_ind[1])[0]
-			book_3 = Book.objects.filter(id=new_ind[2])[0]
-			book_4 = Book.objects.filter(id=new_ind[3])[0]
+			book_1 = Book.objects.get(id=new_ind[0])
+			book_2 = Book.objects.get(id=new_ind[1])
+			book_3 = Book.objects.get(id=new_ind[2])
+			book_4 = Book.objects.get(id=new_ind[3])
 
 			return render(request,'product.html',{
 				'title':bookr.name,
